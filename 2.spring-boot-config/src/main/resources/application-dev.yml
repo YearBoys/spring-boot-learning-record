@@ -1,0 +1,7 @@
+# 开发环境配置文件
+
+yc:
+ config:
+    name: 867
+    title:  我是开发环境配置文件
+    wholeTitle: ${yc.config.name}-${yc.config.title}
