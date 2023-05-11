@@ -1,0 +1,14 @@
+server:
+  port: 11005
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #mybatis-plus 默认集成 可不写
+#  mapper-locations: classpath*:/mapper/**/*.xml
+spring:
+  datasource:
+    username: root
+    password: Yangc
+    url: jdbc:mysql://localhost:3306/yc?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+

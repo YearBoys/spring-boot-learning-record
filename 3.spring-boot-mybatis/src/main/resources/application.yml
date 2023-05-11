@@ -69,6 +69,6 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     # 配置MyBatis的xml配置文件路径
     # 该项目.xml 文件和mapper 同级  需要在 pom 中做配置
-  mapper-locations: classpath*:com/yc/mapper/*.xml
+  mapper-locations: classpath*:com/yc/mybatis/mapper/*.xml
     #配置XML映射文件中指定的实体类别名路径
-  type-aliases-package: com.yc.domain
+  type-aliases-package: com.yc.mybatis.domain
