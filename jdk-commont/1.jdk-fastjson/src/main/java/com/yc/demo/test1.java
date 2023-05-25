@@ -4,6 +4,7 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import java.security.*;
 import java.security.spec.ECGenParameterSpec;
+import java.util.Base64;
 
 /**
  * @Author: yangc
@@ -14,8 +15,17 @@ public class test1 {
 
     public static void main(String[] args) throws Exception {
         test1 test1=new test1();
-        test1.
-        generateSm2Key();
+
+        KeyPair keyPair = test1.
+                generateSm2Key();
+        PrivateKey privateKey = keyPair.getPrivate();
+        PublicKey publicKey = keyPair.getPublic();
+
+
+        System.out.println("SM2公钥:" + new String(Base64.getEncoder().encode(publicKey.getEncoded()), "UTF-8"));
+        System.out.println("SM2私钥:" + new String(Base64.getEncoder().encode(privateKey.getEncoded()), "UTF-8"));
+
+
     }
 
     KeyPair  generateSm2Key() throws InvalidAlgorithmParameterException, NoSuchAlgorithmException {
