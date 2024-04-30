@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.nio.charset.StandardCharsets;
 import java.security.*;
+import java.util.Arrays;
 
 /**
  * @Author: yangc
@@ -58,7 +59,7 @@ public class SecurityTest {
         System.out.println("Public key: \n" + Hex.toHexString(publicKey.getEncoded()));
         System.out.println("Private key: \n" + Hex.toHexString(privateKey.getEncoded()));
 
-        // 转 BASE64
+        // 转 BASE64  使用base64较多(推荐)
         System.out.println(">> 公钥BASE64: " + Base64.toBase64String(publicKey.getEncoded()));
         System.out.println(">> 私钥BASE64: " + Base64.toBase64String(privateKey.getEncoded()));
 
@@ -67,7 +68,13 @@ public class SecurityTest {
 
 
     /**
-     *  私钥签名 公钥 验签
+     *   私钥签名 公钥 验签
+     *       <p>
+     *           一般来说私钥是调用方使用，调用方使用私钥加密
+     *         被调用方验签
+     *         因为SM2 为非对称加密 所以传输的数据加密可配合SM4 使用  SM4 为对称加密
+     *       </p>
+     *
      */
     @Test
     void PublicKeyCheck() throws Exception {
@@ -77,9 +84,44 @@ public class SecurityTest {
         // 签名值
         byte[] bytes = SM2Signature.signByPrivateKey(plainText,SM2Signature.createPrivateKey(privateKey));
 
-        System.out.println(bytes);
 
+        // 转base64
+        String s = Base64.toBase64String(bytes);
+        System.out.println(Base64.toBase64String(bytes));
+        // 验签
         System.out.println(SM2Signature.verifyByPublicKey(plainText, SM2Signature.createPublicKey(publicKey), bytes));
+    }
+
+
+
+    /**
+     *   公钥签名 私钥解密
+     *      <p> 当前场景为 被调用方向调用方返回数据
+     *         需要用公钥加密
+     *          调用方拿到数据后需要做解密
+     *      </p>
+     *
+     */
+    @Test
+    void PrivateKeyCheck() throws Exception {
+        //   公钥签名
+        // 签名原文
+        byte[] plainText = "你好".getBytes(StandardCharsets.UTF_8);
+        // 序列化公钥
+        PublicKey publicKey = SM2Signature.createPublicKey(SecurityTest.publicKey);
+        // 公钥加密
+        byte[] encrypt = SM2EncryptionAndDecryption.encrypt(plainText, publicKey);
+        // 转Base64   秘文
+        String s = Base64.toBase64String(encrypt);
+        // 转会字节数组
+        byte[] decode = Base64.decode(s);
+        System.out.println(Arrays.equals(encrypt, decode));
+        //私钥 解密
+        byte[] decrypt = SM2EncryptionAndDecryption.decrypt(encrypt, SM2Signature.createPrivateKey(privateKey));
+
+        // 转字符串
+        System.out.println(new String(decrypt, "utf-8"));
+
     }
 
 }

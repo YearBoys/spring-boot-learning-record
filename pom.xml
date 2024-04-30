@@ -6,12 +6,16 @@
 
 
     <modules>
-        <module>1.spring-boot-start</module>
-        <module>2.spring-boot-config</module>
-        <module>3.spring-boot-mybatis</module>
-        <module>4.spring-boot-logging</module>
-        <module>5.spring-boot-mybatis-plus</module>
+        <module>1、spring-boot-start</module>
+        <module>2、spring-boot-config</module>
+        <module>4、spring-boot-mybatis</module>
+        <module>3、spring-boot-logging</module>
+        <module>5、spring-boot-mybatis-plus</module>
         <module>jdk-commont</module>
+        <module>99.spring-boot-excel</module>
+        <module>99.spring-boot-excel/poi</module>
+        <module>6、spring-boot-jpa</module>
+        <module>7、spring-boot-data-redis</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -35,6 +39,9 @@
         <mybatis.version>1.1.1</mybatis.version>
         <mybatis.plus.version>3.5.2</mybatis.plus.version>
         <druid.version>1.2.15</druid.version>
+        <fastjson.version>1.2.83</fastjson.version>
+        <commons-text.version>1.10.0</commons-text.version>
+        <commons-lang.version>2.6</commons-lang.version>
     </properties>
 
 

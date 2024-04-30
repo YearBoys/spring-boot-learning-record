@@ -12,7 +12,7 @@
     <artifactId>jdk-commont</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>1.jdk-fastjson</module>
+        <module>1、jdk-fastjson</module>
         <module>2.jdk-fastjson2</module>
         <module>3.SM2JAVA</module>
     </modules>

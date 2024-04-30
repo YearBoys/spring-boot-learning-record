@@ -1,0 +1,16 @@
+server:
+  port: 11006
+  servlet:
+    # url 前缀
+    context-path: /jpa
+spring:
+  datasource:
+    # 数据库访问配置, 使用druid数据源
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/yc.spring-boot-learning?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: Yangc
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    # 显示sql
+    show-sql: true
